@@ -6,6 +6,7 @@ public class Cell : MonoBehaviour
     private TMP_Text cellText;
     private int x, y;
     private bool isBomb;
+    private bool isClicked;
 
     private void Start()
     {
@@ -40,7 +41,7 @@ public class Cell : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (!Generator.Instance.IsWinner)
+        if (!Generator.Instance.IsWinner && isClicked)
         {
             return;
         }
@@ -54,6 +55,7 @@ public class Cell : MonoBehaviour
         }
         else
         {
+            isClicked = true;
             SetText(Generator.Instance.CalculateBombsAround(x, y).ToString());
             Generator.Instance.CheckWinner();
         }
